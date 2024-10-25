@@ -4,7 +4,7 @@ import { LoginDto, SignupDto } from './dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('auth')
-@Controller('auth')
+@Controller('')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
@@ -25,5 +25,14 @@ export class AuthController {
   @Post('signup')
   async signup(@Body() signupDto: SignupDto) {
     return this.authService.signup(signupDto);
+  }
+
+  @ApiOperation({
+    summary: 'refresh-token',
+    description: 'refresh-token: Generating new access token',
+  })
+  @Post('refresh-token')
+  async refreshToken(@Body() body: { refresh_token: string }) {
+    return this.authService.refreshToken(body);
   }
 }
