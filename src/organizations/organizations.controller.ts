@@ -15,6 +15,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/decorator';
 import { User } from 'src/users/schemas/user.schema';
 import { OrganizationGuard } from './guards/organizations.guard';
+import { InviteUserDto } from './dto/invite-user.dto';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('organization')
@@ -52,5 +53,11 @@ export class OrganizationsController {
   @UseGuards(OrganizationGuard)
   remove(@Param('id') id: string) {
     return this.organizationsService.remove(id);
+  }
+
+  @Post(':id/invite')
+  @UseGuards(OrganizationGuard)
+  invite(@Param('id') id: string, @Body() inviteUserDto: InviteUserDto) {
+    return this.organizationsService.inviteUser(id, inviteUserDto);
   }
 }
