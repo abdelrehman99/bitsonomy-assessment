@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { RedisOptions } from './configs/redis.config';
 import { ConfigModule } from '@nestjs/config';
 import { CacheModule } from '@nestjs/cache-manager';
+import { OrganizationsModule } from './organizations/organizations.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CacheModule } from '@nestjs/cache-manager';
     CacheModule.registerAsync(RedisOptions),
     UsersModule,
     AuthModule,
+    OrganizationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
