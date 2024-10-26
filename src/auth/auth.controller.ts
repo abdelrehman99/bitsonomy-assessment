@@ -35,4 +35,13 @@ export class AuthController {
   async refreshToken(@Body() body: { refresh_token: string }) {
     return this.authService.refreshToken(body);
   }
+
+  @ApiOperation({
+    summary: 'revoke-refresh-token',
+    description: 'revoke-refresh-token: Removing certain refresh tokens',
+  })
+  @Post('revoke-refresh-token')
+  async revokeRefreshToken(@Body() body: { refresh_token: string }) {
+    return this.authService.revokeRefreshToken(body);
+  }
 }

@@ -73,6 +73,15 @@ export class AuthService {
     return { message: 'Refresh Successful', access_token, refresh_token };
   }
 
+  async revokeRefreshToken(body: { refresh_token: string }): Promise<{
+    message: string;
+  }> {
+    const { refresh_token } = body;
+    await this.redis.del(`refresh:${refresh_token}`);
+
+    return { message: 'Revoke Successful' };
+  }
+
   async signToken(
     userId: string,
     email: string,
